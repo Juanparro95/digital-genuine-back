@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -11,7 +12,6 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show');
         Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update');
         Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-        Route::get('/{identifier}/count-products', [CategoryController::class, 'countProducts'])->name('categories.countProducts');
     });
 
     Route::prefix('products')->group(function () {
@@ -20,5 +20,9 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}', [ProductController::class, 'show'])->name('products.show');
         Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    });
+
+    Route::prefix('dialogflow')->group(function () {
+        Route::get('/{identifier}/count-products', [WebhookController::class, 'countProducts'])->name('dialogflow.countProducts');
     });
 });
