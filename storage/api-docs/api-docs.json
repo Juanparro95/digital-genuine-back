@@ -272,64 +272,6 @@
                 }
             }
         },
-        "/api/v1/categories/{identifier}/count-products": {
-            "get": {
-                "tags": [
-                    "Categories"
-                ],
-                "summary": "Count products in a category",
-                "operationId": "fe324da57d7f9e63aadd62c494c771ba",
-                "parameters": [
-                    {
-                        "name": "identifier",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "description": "Category ID or name",
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "category": {
-                                            "description": "Category name",
-                                            "type": "string"
-                                        },
-                                        "product_count": {
-                                            "description": "Number of products in the category",
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "description": "Not Found error message",
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/products": {
             "get": {
                 "tags": [
@@ -538,24 +480,29 @@
                 }
             }
         },
-        "/api/v1/webhook/{identifier}/count-products": {
-            "get": {
+        "/api/v1/webhook/count-products": {
+            "post": {
                 "tags": [
                     "Webhook"
                 ],
                 "summary": "Count products in a category for webhook",
-                "operationId": "37dbec01dc7033e78ee242abe7fb0c6c",
-                "parameters": [
-                    {
-                        "name": "identifier",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "description": "Category ID or name",
-                            "type": "string"
+                "operationId": "d1484fc44aefee5212ed93bc29d006e4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category": {
+                                        "description": "Category ID or name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -563,13 +510,16 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "category": {
-                                            "description": "Category name",
+                                        "fulfillmentText": {
+                                            "description": "Response text",
                                             "type": "string"
                                         },
-                                        "product_count": {
-                                            "description": "Number of products in the category",
-                                            "type": "integer"
+                                        "fulfillmentMessages": {
+                                            "description": "Response messages",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

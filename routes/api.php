@@ -23,6 +23,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('dialogflow')->group(function () {
-        Route::get('/{identifier}/count-products', [WebhookController::class, 'countProducts'])->name('dialogflow.countProducts');
+        Route::post('/count-products', [WebhookController::class, 'countProducts'])->name('dialogflow.countProducts');
     });
 });
