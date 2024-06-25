@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use OpenApi\Attributes as OA;
 
 #[
-    OA\Info(version: "1.0.0", description: "petshop api", title: "Digital Genuine Documentation"),
+    OA\Info(version: "1.0.0", description: "digital genuine doc api", title: "Digital Genuine Documentation"),
     // OA\Server(url: 'http://digitalgenuine.test/', description: "local server"),
     // OA\Server(url: 'http://staging.example.com', description: "staging server"),
     OA\Server(url: 'https://digital-genuine-back-production.up.railway.app/', description: "production server"),
