@@ -11,7 +11,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,13 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $productId = $this->route('id');
+
         return [
-            //
+            'name' => 'required|unique:products,name,' . $productId . '|max:255',
+            'description' => 'nullable|max:500',
+            'quantity' => 'required|integer',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

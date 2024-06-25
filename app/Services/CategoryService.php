@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use App\Services\Interfaces\ICategoryService;
-use Illuminate\Http\Request;
 
 class CategoryService implements ICategoryService
 {
@@ -35,7 +36,7 @@ class CategoryService implements ICategoryService
         return $this->modelClass::findOrFail($id);
     }
 
-    public function updateCategory(Request $request, int $id): array|object
+    public function updateCategory(UpdateCategoryRequest $request, int $id): array|object
     {
         $category = $this->modelClass::findOrFail($id);
         $category->name = $request->input('name');
@@ -61,11 +62,11 @@ class CategoryService implements ICategoryService
             $category = $this->modelClass::where('name', $identifier)->firstOrFail();
         }
 
-        //$productCount = Product::where('category_id', $category->id)->count();
+        $productCount = Product::where('category_id', $category->id)->count();
 
         return [
             'category' => $category->name,
-            //'product_count' => $productCount
+            'product_count' => $productCount
         ];
     }
 

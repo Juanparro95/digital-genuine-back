@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\Interfaces\ICategoryService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,8 @@ use OpenApi\Attributes as OA;
 
 class CategoryController extends Controller
 {
+    const ROUTE_API = '/api/v1/categories';
+
     protected ICategoryService $i_CategoryServices;
 
     public function __construct(ICategoryService $iCategoryServices)
@@ -19,7 +22,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Post(
-        path: "/api/v1/categories",
+        path: self::ROUTE_API,
         summary: "Create a new category",
         requestBody: new OA\RequestBody(
             required: true,
@@ -95,7 +98,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Get(
-        path: "/api/v1/categories",
+        path: self::ROUTE_API,
         summary: "Get all categories",
         tags: ["Categories"],
         responses: [
@@ -111,7 +114,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Get(
-        path: "/api/v1/categories/{id}",
+        path: self::ROUTE_API."/{id}",
         summary: "Get a category by ID",
         tags: ["Categories"],
         parameters: [
@@ -147,7 +150,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Put(
-        path: "/api/v1/categories/{id}",
+        path: self::ROUTE_API."/{id}",
         summary: "Update a category",
         requestBody: new OA\RequestBody(
             required: true,
@@ -190,7 +193,7 @@ class CategoryController extends Controller
             )
         ]
     )]
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         try {
             $category = $this->i_CategoryServices->updateCategory($request, $id);
@@ -203,7 +206,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Delete(
-        path: "/api/v1/categories/{id}",
+        path: self::ROUTE_API."/{id}",
         summary: "Delete a category",
         tags: ["Categories"],
         parameters: [
@@ -251,7 +254,7 @@ class CategoryController extends Controller
     }
 
     #[OA\Get(
-        path: "/api/v1/categories/{identifier}/count-products",
+        path: self::ROUTE_API."/{identifier}/count-products",
         summary: "Count products in a category",
         tags: ["Categories"],
         parameters: [
