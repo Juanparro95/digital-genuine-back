@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Attributes;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 use App\Services\Interfaces\IProductService;
 use Illuminate\Http\Response;
 use OpenApi\Attributes as OA;
@@ -28,12 +29,12 @@ class ProductController extends Controller
             content: new OA\MediaType(
                 mediaType: "application/json",
                 schema: new OA\Schema(
-                    required: ["name", "quantity", "category_id"],
+                    required: [Attributes::NAME, Attributes::QUANTITY, Attributes::CATEGORY_ID],
                     properties: [
-                        new OA\Property(property: 'name', description: "Product name", type: "string"),
-                        new OA\Property(property: 'description', description: "Product description", type: "string"),
-                        new OA\Property(property: 'quantity', description: "Product quantity", type: "integer"),
-                        new OA\Property(property: 'category_id', description: "Category ID", type: "integer"),
+                        new OA\Property(property: Attributes::NAME, description: "Product name", type: "string"),
+                        new OA\Property(property: Attributes::DESCRIPTION, description: "Product description", type: "string"),
+                        new OA\Property(property: Attributes::QUANTITY, description: "Product quantity", type: "integer"),
+                        new OA\Property(property: Attributes::CATEGORY_ID, description: "Category ID", type: "integer"),
                     ]
                 )
             )
@@ -94,7 +95,7 @@ class ProductController extends Controller
         summary: "Get a product by ID",
         tags: ["Products"],
         parameters: [
-            new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+            new OA\Parameter(name: Attributes::_ID, in: "path", required: true, schema: new OA\Schema(type: "integer"))
         ],
         responses: [
             new OA\Response(
@@ -131,19 +132,19 @@ class ProductController extends Controller
             content: new OA\MediaType(
                 mediaType: "application/json",
                 schema: new OA\Schema(
-                    required: ["name", "quantity", "category_id"],
+                    required: [Attributes::NAME, Attributes::QUANTITY, Attributes::CATEGORY_ID],
                     properties: [
-                        new OA\Property(property: 'name', description: "Product name", type: "string"),
-                        new OA\Property(property: 'description', description: "Product description", type: "string"),
-                        new OA\Property(property: 'quantity', description: "Product quantity", type: "integer"),
-                        new OA\Property(property: 'category_id', description: "Category ID", type: "integer"),
+                        new OA\Property(property: Attributes::NAME, description: "Product name", type: "string"),
+                        new OA\Property(property: Attributes::DESCRIPTION, description: "Product description", type: "string"),
+                        new OA\Property(property: Attributes::QUANTITY, description: "Product quantity", type: "integer"),
+                        new OA\Property(property: Attributes::CATEGORY_ID, description: "Category ID", type: "integer"),
                     ]
                 )
             )
         ),
         tags: ["Products"],
         parameters: [
-            new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+            new OA\Parameter(name: Attributes::_ID, in: "path", required: true, schema: new OA\Schema(type: "integer"))
         ],
         responses: [
             new OA\Response(
@@ -181,7 +182,7 @@ class ProductController extends Controller
         summary: "Delete a product",
         tags: ["Products"],
         parameters: [
-            new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+            new OA\Parameter(name: Attributes::_ID, in: "path", required: true, schema: new OA\Schema(type: "integer"))
         ],
         responses: [
             new OA\Response(

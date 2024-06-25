@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Enums\Attributes;
+use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\Interfaces\IProductService;
 
@@ -18,10 +19,10 @@ class ProductService implements IProductService
 
     public function createProduct(StoreProductRequest $request)
     {
-        $this->modelClass->name = $request->input('name');
-        $this->modelClass->description = $request->input('description');
-        $this->modelClass->quantity = $request->input('quantity');
-        $this->modelClass->category_id = $request->input('category_id');
+        $this->modelClass->name = $request->input(Attributes::NAME);
+        $this->modelClass->description = $request->input(Attributes::DESCRIPTION);
+        $this->modelClass->quantity = $request->input(Attributes::QUANTITY);
+        $this->modelClass->category_id = $request->input(Attributes::CATEGORY_ID);
         $this->modelClass->save();
 
         return $this->modelClass;
@@ -40,10 +41,10 @@ class ProductService implements IProductService
     public function updateProduct(UpdateProductRequest $request, $id)
     {
         $product = $this->modelClass::findOrFail($id);
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->quantity = $request->input('quantity');
-        $product->category_id = $request->input('category_id');
+        $product->name = $request->input(Attributes::NAME);
+        $product->description = $request->input(Attributes::DESCRIPTION);
+        $product->quantity = $request->input(Attributes::QUANTITY);
+        $product->category_id = $request->input(Attributes::CATEGORY_ID);
         $product->save();
 
         return $this->modelClass;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Categories;
 
+use App\Enums\Attributes;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoryRequest extends FormRequest
@@ -21,11 +22,11 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('id');
+        $categoryId = $this->route(Attributes::_ID);
 
         return [
-            'name' => 'required|unique:categories,name,' . $categoryId . '|max:255',
-            'description' => 'nullable|max:500',
+            Attributes::NAME => 'required|unique:categories,'.Attributes::NAME .',' . $categoryId . '|max:255',
+            Attributes::DESCRIPTION => 'nullable|max:500',
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Services\Interfaces;
 
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 
 interface ICategoryService
 {

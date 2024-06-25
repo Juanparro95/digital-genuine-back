@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Products;
 
+use App\Enums\Attributes;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +23,10 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:categories,name|max:255',
-            'description' => 'nullable|max:500',
+            Attributes::NAME => 'required|unique:products,'.Attributes::NAME.'|max:255',
+            Attributes::DESCRIPTION => 'nullable|max:500',
+            Attributes::QUANTITY => 'required|integer',
+            Attributes::CATEGORY_ID => 'required|exists:categories,id',
         ];
     }
 }

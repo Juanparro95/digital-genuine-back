@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Enums\Attributes;
+use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\Interfaces\ICategoryService;
@@ -19,8 +20,8 @@ class CategoryService implements ICategoryService
     
     public function createCategory(StoreCategoryRequest $request): array|object
     {
-        $this->modelClass->name = $request->input('name');
-        $this->modelClass->description = $request->input('description');
+        $this->modelClass->name = $request->input(Attributes::NAME);
+        $this->modelClass->description = $request->input(Attributes::DESCRIPTION);
         $this->modelClass->save();
 
         return $this->modelClass;
@@ -39,8 +40,8 @@ class CategoryService implements ICategoryService
     public function updateCategory(UpdateCategoryRequest $request, int $id): array|object
     {
         $category = $this->modelClass::findOrFail($id);
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
+        $category->name = $request->input(Attributes::NAME);
+        $category->description = $request->input(Attributes::DESCRIPTION);
         $category->save();
 
         return $category;
@@ -59,10 +60,10 @@ class CategoryService implements ICategoryService
         if (is_numeric($identifier)) {
             $category = $this->modelClass::findOrFail($identifier);
         } else {
-            $category = $this->modelClass::where('name', $identifier)->firstOrFail();
+            $category = $this->modelClass::where(Attributes::NAME, $identifier)->firstOrFail();
         }
 
-        $productCount = Product::where('category_id', $category->id)->count();
+        $productCount = Product::where(Attributes::CATEGORY_ID, $category->id)->count();
 
         return [
             'category' => $category->name,

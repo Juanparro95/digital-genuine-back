@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\Attributes;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Services\Interfaces\ICategoryService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Attributes as OA;
 
@@ -29,10 +29,10 @@ class CategoryController extends Controller
             content: new OA\MediaType(
                 mediaType: "application/json",
                 schema: new OA\Schema(
-                    required: ["name"],
+                    required: [Attributes::NAME],
                     properties: [
-                        new OA\Property(property: 'name', description: "Category name", type: "string"),
-                        new OA\Property(property: 'description', description: "Category description", type: "string"),
+                        new OA\Property(property: Attributes::NAME, description: "Category name", type: "string"),
+                        new OA\Property(property: Attributes::DESCRIPTION, description: "Category description", type: "string"),
                     ]
                 )
             )
@@ -47,9 +47,9 @@ class CategoryController extends Controller
                     schema: new OA\Schema(
                         type: "object",
                         properties: [
-                            new OA\Property(property: 'id', description: "Category ID", type: "integer"),
-                            new OA\Property(property: 'name', description: "Category name", type: "string"),
-                            new OA\Property(property: 'description', description: "Category description", type: "string"),
+                            new OA\Property(property: Attributes::_ID, description: "Category ID", type: "integer"),
+                            new OA\Property(property: Attributes::NAME, description: "Category name", type: "string"),
+                            new OA\Property(property: Attributes::DESCRIPTION, description: "Category description", type: "string"),
                             new OA\Property(property: 'created_at', description: "Creation timestamp", type: "string", format: "date-time"),
                             new OA\Property(property: 'updated_at', description: "Update timestamp", type: "string", format: "date-time"),
                         ]
@@ -157,10 +157,10 @@ class CategoryController extends Controller
             content: new OA\MediaType(
                 mediaType: "application/json",
                 schema: new OA\Schema(
-                    required: ["name"],
+                    required: [Attributes::NAME],
                     properties: [
-                        new OA\Property(property: 'name', description: "Category name", type: "string"),
-                        new OA\Property(property: 'description', description: "Category description", type: "string"),
+                        new OA\Property(property: Attributes::NAME, description: "Category name", type: "string"),
+                        new OA\Property(property: Attributes::DESCRIPTION, description: "Category description", type: "string"),
                     ]
                 )
             )

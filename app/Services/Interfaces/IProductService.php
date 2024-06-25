@@ -2,8 +2,8 @@
 
 namespace App\Services\Interfaces;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 
 interface IProductService
 {
