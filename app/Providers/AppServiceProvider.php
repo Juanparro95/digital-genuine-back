@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+        $this->app->bind(\App\Services\Interfaces\ICategoryService::class, \App\Services\CategoryService::class);
+        $this->app->bind(\App\Services\Interfaces\IProductService::class, \App\Services\ProductService::class);
+
     }
 
     /**
